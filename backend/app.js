@@ -4,6 +4,13 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
+const uri =
+  "mongodb+srv://Ria:4W1t79UF5W4nDjUT@cluster0.vxvy2.mongodb.net/db1?retryWrites=true&w=majority/";
+
+var cors = require("cors");
+var mongoose = require("mongoose");
+var DB_NAME = "testdb";
+
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var testAPIRouter = require("./routes/testAPI");
@@ -13,6 +20,18 @@ var app = express();
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
+
+// Connect to moongose
+// Connection to MongoDB
+mongoose.connect(uri + DB_NAME, {
+  useNewUrlParser: true,
+});
+const connection = mongoose.connection;
+connection.once("open", function () {
+  console.log(
+    `MongoDB database connection to db ${DB_NAME} established successfully !`
+  );
+});
 
 app.use(logger("dev"));
 app.use(express.json());
