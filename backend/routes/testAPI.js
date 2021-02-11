@@ -1,6 +1,8 @@
 var express = require("express");
 var router = express.Router();
 
+const TBlog = require("../models/testBlog");
+
 router.get("/", function (req, res, next) {
   res.send("API is working properly");
 });
@@ -13,6 +15,30 @@ router.post("/testPost", function (req, res, next) {
   }
   console.log(name);
   res.send("API is working properly!!!!");
+});
+
+router.post("/createPost", function (req, res, next) {
+  let title = req.body.title;
+  let content = req.body.content;
+  let date = new Date();
+  if (!title || !content) {
+    res.send("Title or content not provided");
+  }
+  let blog = new TBlog({
+    title,
+    content,
+    date,
+  });
+  blog
+    .save()
+    .then((status) => {
+      res.send("Blog saved");
+      console.log(status);
+    })
+    .catch((err) => {
+      res.send("Not saved");
+      console.log(err);
+    });
 });
 
 module.exports = router;
