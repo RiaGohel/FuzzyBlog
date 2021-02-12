@@ -3,11 +3,12 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-
+var keys = require("./configs/keys");
 var cors = require("cors");
+
 var mongoose = require("mongoose");
 var DB_NAME = "testdb";
-const uri = "mongodb://127.0.0.1:27017/";
+const uri = keys.MONGO_URI;
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -23,6 +24,7 @@ app.set("view engine", "jade");
 // Connection to MongoDB
 mongoose.connect(uri + DB_NAME, {
   useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 
 const connection = mongoose.connection;
@@ -32,6 +34,7 @@ connection.once("open", function () {
   );
 });
 
+app.use(cors);
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
