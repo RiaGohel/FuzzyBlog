@@ -13,6 +13,7 @@ const uri = keys.MONGO_URI;
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var testAPIRouter = require("./routes/testAPI");
+var signupRouter = require("./routes/signup");
 
 var app = express();
 
@@ -34,7 +35,7 @@ connection.once("open", function () {
   );
 });
 
-app.use(cors);
+//app.use(cors);
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -44,6 +45,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/testAPI", testAPIRouter);
+app.use("/signup", signupRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

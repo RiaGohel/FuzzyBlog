@@ -18,7 +18,7 @@ const BlogSchema = new Schema({
     required: true,
   },
   liked_by: {
-    type: [String], //array of strings??
+    type: Array, //array of strings??
     unique: true,
   },
 });
