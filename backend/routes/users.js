@@ -3,7 +3,7 @@ var router = express.Router();
 const UserSession = require("../models/usersession");
 
 /* GET users listing. */
-router.get("/", function (req, res, next) {
+router.get("/", (req, res, next) => {
   res.send("respond with a resource");
 });
 
