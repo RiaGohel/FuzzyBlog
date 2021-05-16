@@ -4,7 +4,7 @@ var router = express.Router();
 const Blog = require("../models/blogs");
 const auth = require("../auth/auth.js");
 
-router.post("/createBlog", auth, function (req, res, next) {
+router.post("/createBlog", auth, (req, res, next) => {
   let title = req.body.title;
   let content = req.body.content;
   let user = req.user;
