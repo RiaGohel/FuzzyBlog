@@ -1,4 +1,4 @@
-function signin() {
+function Signin() {
   return (
     <div>
       <h1>This is our signin page</h1>
@@ -6,4 +6,4 @@ function signin() {
   );
 }
 
-export default signin;
+export default Signin;
